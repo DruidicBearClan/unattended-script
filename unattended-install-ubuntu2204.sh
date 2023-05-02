@@ -1,48 +1,35 @@
 #~/bin/bash
 
-#Update package list and install them
+#Regular ubuntu mirrorlist update and upgrade all apps
 apt get update && apt get upgrade -y
 
-#Get required packages
-apt install net-tools whois ldnsutils git libglib2.0-dev-bin ffmpeg baobab htop vlc eog traceroute evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix qt5-style-kvantum qt5-style-kvantum-themes 
+#Installing the essential net-tools and media
+apt install net-tools openssh whois ldnsutils ffmpeg traceroute nmap -y
 
-#Enable UFW with default rules and allow SSH
+#installing required libraries and older themes for non-gtk3 apps
+apt install qt5-style-kvantum qt5-style-kvantum-themes libssl-dev libssh-dev libidn11-dev libpcre3-dev -y
+
+#Installing essential applications
+apt install baobab rlwrap ufw htop vim git vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
+
+#Install security tools included in default ubuntu mirrors (where held version is no concern)
+apt install proxychains hashcat gpg pgpgpg tor proxychains default-mysql-client libimage-exiftool-perl
+
+#Enable a simple local firewall with a default deny policy
 ufw enable
 ufw default deny incoming
 ufw default allow outgoing
-ufw allow ssh
-ufw reload 
+ufw reload
 ufw status numbered
 
-#Add mozilla FF Repo
-add-apt-repository ppa:mozillateam/ppa
+#Create some extra folders in home directory
+mkdir /home/$USER/.icons /home/$USER/.themes /home/$USER/Apps /home/$USER/Tools /home/$USER/Dev
 
-snap remove firefox
+echo select the number for option tilix terminal as default and confirm the choice
 
-#Let DPKG manage Firefox updates instead of snap
-echo '
-Package: *
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001
-' | sudo tee /etc/apt/preferences.d/mozilla-firefox
-
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-
-#install firefox .deb package
-sudo apt update && sudo apt install firefox
-
-
-
-#Create local icon and theme folders
-mkdir /home/$USER/.icons
-mkdir /home/$USER/.themes
-
-
-#Set tilix terminal as system default, add tilix context menu button
-sudo update-alternatives --config x-terminal-emulator
-sudo apt install python3-nautilus
-sudo apt remove nautilus-extension-gnome-terminal
+#Sets tilix application as the default terminal, adds tilix as context-menu option, remove ubuntu terminal as option
+update-alternatives --config x-terminal-emulator
+apt install python3-nautilus
+apt remove nautilus-extension-gnome-terminal
 killall nautilus
-
-#Removes default terminal entry
 mv /usr/share/applications/org.gnome.Terminal.desktop /usr/share/applications/org.gnome.Terminal.desktop_bak
