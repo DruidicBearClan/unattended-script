@@ -4,7 +4,8 @@ function pause(){
    read -p "$*"
 }
 
-pause 'This script assumes that you have a new ubuntu install or that you at least have read some of what the script does. Press any key to confirm that, or cancel with Ctrl-C'
+pause 'This script assumes that you have a new ubuntu install or that you at least have read some of what the script does. 
+Press any key to confirm that, or cancel with Ctrl-C'
 
 echo updating regular packages
 apt get update && apt get upgrade -y
@@ -18,8 +19,8 @@ apt install qt5-style-kvantum qt5-style-kvantum-themes libssl-dev libssh-dev lib
 echo installing some essential software
 apt install baobab rlwrap ufw htop vim git vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
 
-echo installing Ubuntu-repo included security tools for which the release version is not an issue
-apt install proxychains hashcat gpg pgpgpg tor proxychains default-mysql-client libimage-exiftool-perl -y
+echo installing Ubuntu-repos included security tools, for which the release version is not an issue
+apt install proxychains hashcat gpg pgpgpg tor default-mysql-client libimage-exiftool-perl -y
 
 echo enabling UFW firewall with default deny rules
 ufw enable
