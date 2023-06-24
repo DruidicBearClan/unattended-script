@@ -1,4 +1,4 @@
-#~/bin/bash
+#!/bin/bash
 
 #functions
 
@@ -26,7 +26,7 @@ echo installing some essential software
 apt install baobab rlwrap ufw htop vim git vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
 
 echo installing the packages for which the release version is not an issue, grabbing those from default Ubuntu repo.
-apt install proxychains wireshark meld hashcat gpg pgpgpg tor default-mysql-client libimage-exiftool-perl -y
+apt install proxychains wireshark meld hashcat gpg pgpgpg sqlitebrowser tor default-mysql-client libimage-exiftool-perl -y
 
 #installing uncomplicated fire wall
 echo enabling UFW firewall with default deny rules
