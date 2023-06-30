@@ -50,16 +50,12 @@ apt remove nautilus-extension-gnome-terminal
 killall nautilus
 mv /usr/share/applications/org.gnome.Terminal.desktop /usr/share/applications/org.gnome.Terminal.desktop_bak
 
-#Disable Wayland, enable X11, blackist nouveau
+#Disable Wayland, enable X11
+echo Disabling Wayland, enabling X11,
 sed 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
 
-bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
-bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
-
-#Update the kernel
-update-initramfs -u
-
 #Creating a default 4GB swap partition
+echo Creating 4GB swap file
 swapoff -a
 dd if=/dev/zero of=/swapfile bs=1M count=4096
 mkswap /swapfile
@@ -67,6 +63,7 @@ swapon /swapfile
 free -m
 
 #Installing nvidia graphics drivers when available
+echo installing Nvidia GPU drivers
 lshw -c display
 ubuntu-drivers autoinstall
 
