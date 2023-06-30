@@ -66,4 +66,8 @@ mkswap /swapfile
 swapon /swapfile
 free -m
 
+#Installing nvidia graphics drivers when available
+lshw -c display
+ubuntu-drivers autoinstall
+
 echo A reboot of the system is now required.
