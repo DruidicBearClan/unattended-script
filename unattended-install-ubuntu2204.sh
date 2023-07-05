@@ -8,7 +8,7 @@ function pause(){
 
 #init
 
-#MOTD
+#warn
 pause 'This script assumes that you have a new Ubuntu install. This script will do a lot of stuff, read the code.
 Press any key to confirm, or cancel with Ctrl-C. Tested on Ubuntu Desktop 22.04 minimal version'
 
@@ -50,11 +50,11 @@ apt remove nautilus-extension-gnome-terminal
 killall nautilus
 mv /usr/share/applications/org.gnome.Terminal.desktop /usr/share/applications/org.gnome.Terminal.desktop_bak
 
-#Disable Wayland, enable X11
-echo Disabling Wayland, enabling X11,
+#disable Wayland, enable X11
+echo Disabling Wayland, enabling X11
 sed 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
 
-#Creating a default 4GB swap partition
+#creating a default 4GB swap partition
 echo Creating 4GB swap file
 swapoff -a
 dd if=/dev/zero of=/swapfile bs=1M count=4096
@@ -62,9 +62,9 @@ mkswap /swapfile
 swapon /swapfile
 free -m
 
-#Installing nvidia graphics drivers when available
+#installing nvidia graphics drivers when available
 echo installing Nvidia GPU drivers
 lshw -c display
 ubuntu-drivers autoinstall
 
-echo A reboot of the system is now required.
+echo A reboot of the system is now required
