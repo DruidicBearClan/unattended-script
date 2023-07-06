@@ -25,8 +25,8 @@ apt install qt5-style-kvantum qt5-style-kvantum-themes libssl-dev libssh-dev lib
 echo installing some essential software
 apt install baobab rlwrap ufw htop vim git vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
 
-echo installing the packages for which the release version is not an issue, grabbing those from default Ubuntu repo.
-apt install proxychains slapd ldap-utils wireshark meld hashcat gpg pgpgpg sqlitebrowser tor default-mysql-client libimage-exiftool-perl -y
+echo installing the security packages for which the release version is not an issue, grabbing those from default Ubuntu repo.
+apt install proxychains slapd ssdeep ldap-utils wireshark meld hashcat gpg pgpgpg sqlitebrowser tor default-mysql-client libimage-exiftool-perl -y
 
 systemctl enable slapd
 
