@@ -64,8 +64,8 @@ ufw reload
 echo creating multiple folders in home directory
 mkdir /home/$USER/.icons /home/$USER/.themes /home/$USER/Apps /home/$USER/Tools /home/$USER/Dev
 
-#configuring tilix default terminal application and fixing context menu
-echo Now select tilix terminal from the options and confirm the choice with ENTER
+#configuring tilix as the default terminal application and change ubuntu's default terminal right-click context menu
+echo Now select the tilix terminal from the options and confirm the preference with ENTER
 
 update-alternatives --config x-terminal-emulator
 apt install python3-nautilus
