@@ -25,12 +25,29 @@ apt install qt5-style-kvantum qt5-style-kvantum-themes libssl-dev libssh-dev lib
 echo installing some essential software
 apt install baobab rlwrap ufw htop vim git vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
 
-echo installing the security packages for which the release version is not an issue, grabbing those from default Ubuntu repo.
+echo installing some security tooling packages for which the version is not a concern.
 apt install proxychains slapd ssdeep ldap-utils wireshark meld hashcat gpg pgpgpg sqlitebrowser tor default-mysql-client libimage-exiftool-perl -y
 
-systemctl enable slapd
+#installing new nvidia graphics drivers when available
+echo installing Nvidia GPU drivers
+lshw -c display
+ubuntu-drivers autoinstall -y
 
-#installing uncomplicated fire wall
+echo A reboot of the system is required to configure new nvida display drivers
+
+#disable Wayland, enable X11
+echo Disabling Wayland, enabling X11
+sed 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
+
+#creating a default 4GB swap partition
+echo Creating 4GB swap file
+swapoff -a
+dd if=/dev/zero of=/swapfile bs=1M count=4096
+mkswap /swapfile
+swapon /swapfile
+free -m
+
+#enable uncomplicated firewall
 echo enabling UFW firewall with default deny rules
 ufw enable
 ufw default deny incoming
@@ -49,22 +66,3 @@ apt install python3-nautilus
 apt remove nautilus-extension-gnome-terminal
 killall nautilus
 mv /usr/share/applications/org.gnome.Terminal.desktop /usr/share/applications/org.gnome.Terminal.desktop_bak
-
-#disable Wayland, enable X11
-echo Disabling Wayland, enabling X11
-sed 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
-
-#creating a default 4GB swap partition
-echo Creating 4GB swap file
-swapoff -a
-dd if=/dev/zero of=/swapfile bs=1M count=4096
-mkswap /swapfile
-swapon /swapfile
-free -m
-
-#installing nvidia graphics drivers when available
-echo installing Nvidia GPU drivers
-lshw -c display
-ubuntu-drivers autoinstall
-
-echo A reboot of the system is now required
