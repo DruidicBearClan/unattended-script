@@ -6,6 +6,12 @@ function pause(){
    read -p "$*"
 }
 
+#Require root permissions
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 #init
 
 #warn
@@ -33,7 +39,7 @@ echo installing Nvidia GPU drivers
 lshw -c display
 ubuntu-drivers autoinstall -y
 
-echo A reboot of the system is required to configure new nvida display drivers
+echo A reboot of the system is required to configure new nvidia display drivers
 
 #disable Wayland, enable X11
 echo Disabling Wayland, enabling X11
