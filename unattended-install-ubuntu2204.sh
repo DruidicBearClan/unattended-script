@@ -39,10 +39,10 @@ echo A reboot of the system is required to configure new nvida display drivers
 echo Disabling Wayland, enabling X11
 sed 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm3/custom.conf
 
-#creating a default 4GB swap partition
-echo Creating 4GB swap file
+#creating a swap partition
+echo Creating a swap file partition of 6GB
 swapoff -a
-dd if=/dev/zero of=/swapfile bs=1M count=4096
+dd if=/dev/zero of=/swapfile bs=1M count=6144
 mkswap /swapfile
 swapon /swapfile
 free -m
