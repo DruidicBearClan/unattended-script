@@ -23,13 +23,13 @@ sleep 5 updating regular packages
 apt get update && apt get upgrade -y
 
 sleep 5 Installing the essential media, system and networking tools
-apt install net-tools openssh baobab whois remmina htop ldnsutils ffmpeg traceroute nmap -y
+apt install ffmpeg net-tools openssh whois pdns-server remmina htop dnsutils ldnsutils traceroute nmap -y
 
 echo installing required libraries and older themes for non-gtk3 apps
 apt install qt5-style-kvantum qt5-style-kvantum-themes libssl-dev libssh-dev libidn11-dev libpcre3-dev -y
 
 echo installing some essential software
-apt install notepadqq obsidian rlwrap ufw gimp vim git filezilla vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
+apt install notepadqq obsidian rlwrap baobab ufw gimp vim git filezilla vlc eog evolution-ews gnome-shell-extension-manager chrome-gnome-shell gnome-tweaks tilix -y
 
 echo installing some security tooling packages for which the version is not a concern.
 apt install proxychains slapd ssdeep ldap-utils wireshark meld hashcat gpg pgpgpg sqlitebrowser tor default-mysql-client libimage-exiftool-perl -y
